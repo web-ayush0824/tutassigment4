@@ -44,7 +44,6 @@
     footer ul { list-style:none; padding:0; }
     footer .social ion-icon { font-size:24px; margin-right:10px; color:#06A8FF; cursor:pointer; }
 
-    /* Service section */
     .service .container { background-color:#f5f5f5; padding:40px 20px; border-radius:10px; }
     .service .container .service-left { background-color:#fff; border-radius:10px; padding:30px; width:100%; max-width:550px; margin-bottom:30px; }
     .service .container .service-left h2 { font-size:28px; color:#4B5B67; margin-bottom:15px; }
@@ -55,12 +54,9 @@
     .single-service .left-service ion-icon { font-size:24px; color:#06A8FF; }
     .single-service .left-service .service-name { font-size:18px; font-weight:500; color:#333; }
     .single-service .left-service .service-price { font-size:16px; color:#888; }
-    .single-service:nth-child(even) .remove {
-      padding:10px 20px; border-radius:10px; outline:none; border:none; color:red; font-size:16px; font-weight:600; background:#ff00001a; cursor:pointer;
-    }
-    .single-service:nth-child(odd) .remove {
-      padding:10px 20px; border-radius:10px; outline:none; border:none; color:#222; font-size:16px; font-weight:600; background:rgba(0,0,0,0.05); cursor:pointer;
-    }
+    .single-service .actions button { padding:10px 20px; border-radius:10px; outline:none; border:none; font-size:16px; font-weight:600; cursor:pointer; }
+    .single-service .actions .add-item { background:rgba(0,0,0,0.05); color:#222; }
+    .single-service .actions .remove-item { background:#ff00001a; color:red; display:none; }
     .service .container .service-right .added-items { background:#fff; border-radius:10px; padding:30px; margin-bottom:30px; overflow-x:auto; }
     .service .container .service-right .added-items h3 { margin-bottom:20px; color:#4B5B67; }
     table { width:100%; border-collapse:collapse; }
@@ -105,8 +101,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Header Section  -->
   <header>
     <nav>
       <div class="logo"><h2>Logo</h2></div>
@@ -122,7 +116,6 @@
     </nav>
   </header>
 
-  <!-- Banner Section -->
   <section>
     <div class="container">
       <div class="left">
@@ -136,7 +129,6 @@
     </div>
   </section>
 
-  <!-- Achievement Section -->
   <section class="achive">
     <div class="container">
       <h2>Our Achivement</h2>
@@ -148,7 +140,6 @@
     </div>
   </section>
 
-  <!-- Service Section -->
   <section class="service">
     <div class="container">
       <div class="service-left">
@@ -161,8 +152,9 @@
             <div class="service-name">Dry Cleaning</div>
             <div class="service-price">Rs. 200.00</div>
           </div>
-          <div class="right-service">
-            <button class="remove" id="dry">Add item</button>
+          <div class="right-service actions">
+            <button class="add-item" id="dry">Add item</button>
+            <button class="remove-item" id="dry-remove">Remove item</button>
           </div>
         </div>
         <div class="single-service">
@@ -171,8 +163,9 @@
             <div class="service-name">Wash & Fold</div>
             <div class="service-price">Rs. 150.00</div>
           </div>
-          <div class="right-service">
-            <button class="remove" id="wash">Add item</button>
+          <div class="right-service actions">
+            <button class="add-item" id="wash">Add item</button>
+            <button class="remove-item" id="wash-remove">Remove item</button>
           </div>
         </div>
         <div class="single-service">
@@ -181,8 +174,9 @@
             <div class="service-name">Premium Pressing</div>
             <div class="service-price">Rs. 250.00</div>
           </div>
-          <div class="right-service">
-            <button class="remove" id="press">Add item</button>
+          <div class="right-service actions">
+            <button class="add-item" id="press">Add item</button>
+            <button class="remove-item" id="press-remove">Remove item</button>
           </div>
         </div>
         <div class="single-service">
@@ -191,8 +185,9 @@
             <div class="service-name">Shirt Laundry</div>
             <div class="service-price">Rs. 100.00</div>
           </div>
-          <div class="right-service">
-            <button class="remove" id="shirt">Add item</button>
+          <div class="right-service actions">
+            <button class="add-item" id="shirt">Add item</button>
+            <button class="remove-item" id="shirt-remove">Remove item</button>
           </div>
         </div>
         <div class="single-service">
@@ -201,8 +196,9 @@
             <div class="service-name">Business Suit Clean</div>
             <div class="service-price">Rs. 500.00</div>
           </div>
-          <div class="right-service">
-            <button class="remove" id="suit">Add item</button>
+          <div class="right-service actions">
+            <button class="add-item" id="suit">Add item</button>
+            <button class="remove-item" id="suit-remove">Remove item</button>
           </div>
         </div>
         <hr>
@@ -239,14 +235,12 @@
             </div>
           </div>
           <button class="form-submit" type="submit">Book Now</button>
-          <!-- message placeholder -->
           <div class="form-message" style="display:none;"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services Section -->
   <section class="services">
     <div class="container">
       <div class="all-services">
@@ -274,7 +268,6 @@
     </div>
   </section>
 
-  <!-- Newsletter Section -->
   <section class="newsletter">
     <div class="container">
       <h2>Subscribe to our newsletter</h2>
@@ -288,7 +281,6 @@
     </div>
   </section>
 
-  <!-- Footer Section -->
   <footer>
     <div class="container">
       <div class="logo">
@@ -327,86 +319,106 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    emailjs.init("YOUR_PUBLIC_KEY");  // replace with your public key
-
-    // logic for adding items
-    const serviceButtons = document.querySelectorAll(".remove");
-    const tbody = document.querySelector("table tbody");
-    let serialNumber = 1;
-
-    serviceButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        const singleService = button.closest(".single-service");
-        const serviceName = singleService.querySelector(".service-name").innerText;
-        const servicePrice = singleService.querySelector(".service-price").innerText;
-
-        const tr = document.createElement("tr");
-        const tdSerial = document.createElement("td");
-        const tdName = document.createElement("td");
-        const tdPrice = document.createElement("td");
-
-        tdSerial.textContent = serialNumber++;
-        tdName.textContent = serviceName;
-        tdPrice.textContent = servicePrice;
-
-        tr.append(tdSerial, tdName, tdPrice);
-        tbody.appendChild(tr);
-
-        updateTotal();
-      });
-    });
-
-    function updateTotal() {
-      const priceCells = tbody.querySelectorAll("tr td:nth-child(3)");
-      let total = 0;
-      priceCells.forEach(cell => {
-        const amount = parseFloat(cell.textContent.replace(/[^\d.]/g,""));
-        if (!isNaN(amount)) total += amount;
-      });
-      const totalCell = document.querySelector("tfoot td:last-child");
-      totalCell.textContent = "Rs. " + total.toFixed(2);
+emailjs.init("FNzh49-YBToO5Pdnc");
+const addButtons = document.querySelectorAll('.add-item');
+const removeButtons = document.querySelectorAll('.remove-item');
+const tbody = document.querySelector('table tbody');
+addButtons.forEach(btn => {
+  btn.textContent = 'Add item +';
+  btn.addEventListener('click', () => {
+    const singleService = btn.closest('.single-service');
+    const serviceName = singleService.querySelector('.service-name').innerText;
+    const servicePrice = singleService.querySelector('.service-price').innerText;
+    const tr = document.createElement('tr');
+    const tdSerial = document.createElement('td');
+    const tdName = document.createElement('td');
+    const tdPrice = document.createElement('td');
+    tdName.textContent = serviceName;
+    tdPrice.textContent = servicePrice;
+    tr.append(tdSerial, tdName, tdPrice);
+    tr.dataset.id = btn.id;
+    tbody.appendChild(tr);
+    refreshSerials();
+    updateTotal();
+    btn.style.display = 'none';
+    const rem = document.getElementById(btn.id + '-remove');
+    if (rem) {
+      rem.style.display = 'inline-block';
+      rem.textContent = 'Remove item -';
+      rem.style.background = 'red';
+      rem.style.color = 'white';
     }
-
-    // handle booking form submission
-    const formButton = document.querySelector(".form-submit");
-    formButton.addEventListener("click", e => {
-      e.preventDefault();
-      const name = document.querySelector("#name").value.trim();
-      const email = document.querySelector("#email").value.trim();
-      const phone = document.querySelector("#phone").value.trim();
-
-      const messageBox = document.querySelector(".form-message");
-
-      if (!name || !email || !phone) {
-        messageBox.style.display = "block";
-        messageBox.textContent = "❌ Please fill in all fields.";
-        messageBox.className = "form-message error";
-        return;
-      }
-
-      // Get total amount from table footer
-      const totalText = document.querySelector("tfoot td:last-child").textContent;
-      // send email via EmailJS
-      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-        user_name: name,
-        user_email: email,
-        user_phone: phone,
-        total_amount: totalText
-      }).then(response => {
-        // show confirmation message
-        messageBox.style.display = "block";
-        messageBox.textContent = "✅ Thank you for booking the service! We will get back to you soon!";
-        messageBox.className = "form-message success";
-        // optionally clear fields
-        document.querySelector("#name").value="";
-        document.querySelector("#email").value="";
-        document.querySelector("#phone").value="";
-      }, err => {
-        messageBox.style.display = "block";
-        messageBox.textContent = "❌ Oops! Something went wrong. Please try again.";
-        messageBox.className = "form-message error";
-      });
-    });
-  </script>
+  });
+});
+removeButtons.forEach(btn => {
+  btn.textContent = 'Remove item -';
+  btn.style.display = 'none';
+  btn.addEventListener('click', () => {
+    const id = btn.id.replace('-remove', '');
+    const row = tbody.querySelector("tr[data-id='" + id + "']");
+    if (row) row.remove();
+    refreshSerials();
+    updateTotal();
+    btn.style.display = 'none';
+    const add = document.getElementById(id);
+    if (add) {
+      add.style.display = 'inline-block';
+      add.textContent = 'Add item +';
+      add.style.background = '';
+      add.style.color = '';
+    }
+  });
+});
+function refreshSerials() {
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  rows.forEach((r, i) => {
+    r.querySelector('td').textContent = i + 1;
+  });
+}
+function updateTotal() {
+  const priceCells = tbody.querySelectorAll('tr td:nth-child(3)');
+  let total = 0;
+  priceCells.forEach(cell => {
+    let text = cell.textContent || '';
+    text = text.replace('Rs.','').replace('Rs','').trim();
+    const amount = parseFloat(text) || 0;
+    if (!isNaN(amount)) total += amount;
+  });
+  const totalCell = document.querySelector('tfoot td:last-child');
+  totalCell.textContent = 'Rs. ' + total.toFixed(2);
+}
+const formButton = document.querySelector('.form-submit');
+formButton.addEventListener('click', e => {
+  e.preventDefault();
+  const name = document.querySelector('#name').value.trim();
+  const email = document.querySelector('#email').value.trim();
+  const phone = document.querySelector('#phone').value.trim();
+  const messageBox = document.querySelector('.form-message');
+  if (!name || !email || !phone) {
+    messageBox.style.display = 'block';
+    messageBox.textContent = 'Please fill in all fields.';
+    messageBox.className = 'form-message error';
+    return;
+  }
+  const totalText = document.querySelector('tfoot td:last-child').textContent;
+  emailjs.send('service_bo65ngn', 'template_nraxu0s', {
+    user_name: name,
+    user_email: email,
+    user_phone: phone,
+    total_amount: totalText
+  }).then(response => {
+    messageBox.style.display = 'block';
+    messageBox.textContent = 'Thank you For Booking the Service We will get back to you soon!';
+    messageBox.className = 'form-message success';
+    document.querySelector('#name').value = '';
+    document.querySelector('#email').value = '';
+    document.querySelector('#phone').value = '';
+  }, err => {
+    messageBox.style.display = 'block';
+    messageBox.textContent = 'Oops! Something went wrong. Please try again.';
+    messageBox.className = 'form-message error';
+  });
+});
+</script>
 </body>
 </html>
