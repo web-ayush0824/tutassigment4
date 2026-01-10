@@ -875,13 +875,14 @@
       const itemsList = serviceItems.join(', ') || 'No items selected';
       
       emailjs.send("service_bo65ngn","template_nraxu0s",{
-    name: name,
-    email: email,
-    user_name: name,
-    user_phone: phone,
-    total_amount: totalText,
-    service_items: itemsList
-  }).then(response => {
+        name: name,
+        email: email, 
+        user_name: name,
+        user_phone: phone,
+        total_amount: totalText,
+        service_items: itemsList,
+        title: "Laundry Service Booking"
+    }).then(response => {
         messageBox.style.display = 'block';
         messageBox.textContent = 'Thank you For Booking the Service We will get back to you soon!';
         messageBox.className = 'form-message success';
